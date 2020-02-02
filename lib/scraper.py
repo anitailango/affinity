@@ -8,14 +8,11 @@ import urllib
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
 
-df = pd.read_csv("Interactive Media Bias Chart - Ad Fontes Media.csv")
-
-# Removing last row of dataframe due to error???
-# df.drop(df.index[len(df) - 1], inplace=True)
+# df = pd.read_csv("Interactive Media Bias Chart - Ad Fontes Media.csv")
 
 # Function definition
 def scrape_header(my_url):
-    print("Scraping URL no. ", df.index[df['Url'] == my_url][0])
+    #print("Scraping URL no. ", df.index[df['Url'] == my_url][0])
     try:
         uClient = uReq(my_url) # this will download the webpage
         page_html = uClient.read() # this will dump out the content and store it in something else
@@ -49,15 +46,18 @@ def scrape_body(my_url):
         return ' '.join(paragraph_list)
 
     except urllib.error.HTTPError:
-        return None
+        return('HTTPError')
 
-    except:
-        return None
+    # except:
+    #     return None
+
+    except Exception as ex:
+        return(type(ex).__name__)
 
 # Scraping data
-df['Header'] = df['Url'].apply(scrape_header)
-df['Body'] = df['Url'].apply(scrape_body)
+# df['Header'] = df['Url'].apply(scrape_header)
+# df['Body'] = df['Url'].apply(scrape_body)
 
 # Writing to CSV
-print('Writing to CSV')
-df.to_csv(r'C:\Users\quort\Documents\GitHub\affinity\scraped_data.csv')
+# print('Writing to CSV')
+# df.to_csv(r'C:\Users\quort\Documents\GitHub\affinity\scraped_data.csv')
