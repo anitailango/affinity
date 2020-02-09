@@ -35,43 +35,46 @@ dates = []
 texts = []
 titles = []
 n_links = []
+url_links = []
 
-for json_num in range(0, len(data)):
-    url_list = data[json_num].keys()
-    
-    for url in url_list:
-        print('json number: ', json_num, 'url: ', url)
+if not os.path.exists('../../data/raw_data.csv'):
+    for json_num in range(0, len(data)):
+        url_list = data[json_num].keys()
         
-        objects = data[json_num][url].get('objects')
-        if objects != None:
-            author = objects[0].get('author')
-            date = objects[0].get('date')
-            text = objects[0].get('text')
-            title = objects[0].get('title')
+        for url in url_list:
+            print('json number: ', json_num, 'url: ', url)
+            
+            objects = data[json_num][url].get('objects')
+            if objects != None:
+                author = objects[0].get('author')
+                date = objects[0].get('date')
+                text = objects[0].get('text')
+                title = objects[0].get('title')
 
-            html = objects[0].get('html')
-            if html != None:
-                n_link = html.count("href=")
-            else:
-                n_link = None
-                
-            authors.append(author)
-            dates.append(date)
-            texts.append(text)
-            titles.append(title)
-            n_links.append(n_link)
+                html = objects[0].get('html')
+                if html != None:
+                    n_link = html.count("href=")
+                else:
+                    n_link = None
+                    
+                authors.append(author)
+                dates.append(date)
+                texts.append(text)
+                titles.append(title)
+                n_links.append(n_link)
+                url_links.append(url)
 
-# Converting to data frame
-final = pd.DataFrame({'author': authors,
-                      'date': dates,
-                      'header': titles,
-                      'body': texts,
-                      'n_links': n_links
-                     })
-
-if not os.path.exists('./../data/raw_data.csv'):
+    # Converting to data frame
+    final = pd.DataFrame({'Url': url_links, 
+                        'Author': authors,
+                        'Date': dates,
+                        'Header': titles,
+                        'Body': texts,
+                        'n_links': n_links
+                        })
+                        
     # Writing to CSV
-    final.to_csv('../../data/raw_data.csv')
+    final.to_csv('../../data/raw_data.csv', index=False)
 else:
     print('file already exists!')
 
