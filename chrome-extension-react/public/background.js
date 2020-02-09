@@ -14,7 +14,9 @@ chrome.webNavigation.onCompleted.addListener(function (e) {
 		.then((res) => {
 			return res.json();
 		})
-		.then(({ author, content }) => {
-			alert(`Author: ${author}\nContent: ${content}`)
-	});
+		.then((json) => {
+			const { author, content } = json;
+			alert(`Author: ${author}\nContent: ${content}\nSaved this buddy boy to local storage!`);
+			localStorage.setItem("author", author);
+		});
 }, { url: news_article_urls});
