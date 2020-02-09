@@ -17,6 +17,9 @@ chrome.webNavigation.onCompleted.addListener(function (e) {
 		.then((json) => {
 			const { author, content } = json;
 			alert(`Author: ${author}\nContent: ${content}\nSaved this buddy boy to local storage!`);
+			
+			// Save to local storage
 			localStorage.setItem("author", author);
+			localStorage.setItem("content", content);
 		});
 }, { url: news_article_urls});

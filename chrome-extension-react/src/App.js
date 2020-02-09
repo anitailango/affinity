@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './48.png';
 import Header from './Header.js';
 import Text from './Text.js';
-import TestComponent from './components/test';
+import TestComponent from './components/Test';
 
 function App() {
   return (
