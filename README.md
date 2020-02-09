@@ -10,7 +10,7 @@ For Final Data:
 Articles are based on 'Interactive Media Bias Chart - Ad Fontes Media.csv'
 
 ## Data Pipeline
-1.) API retrieves JSONs
-2.) json_extract.py converts JSONs to CSV 
-3.) process_raw.py cleans CSV 
-4.) final_data.csv
+1.) API retrieves JSONs  
+2.) json_extract.py converts JSONs to CSV  
+3.) process_raw.py cleans CSV  
+4.) final_data.csv  
