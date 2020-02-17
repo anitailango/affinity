@@ -1,5 +1,6 @@
 
 # This file contains functions that helps with NLP processing
+from statistics import mean
 
 # Natural Language Processing
 ### General
@@ -34,20 +35,19 @@ def get_entities(text):
 
 def extract_sentences(word, text):
     # extract all sentences in text in which word appears
-    sentences = []
-    for sentence in text.split('.'):
-        if (word in sentence):
-            sentences.append(sentence)
-    
+    sentences = [sentence for sentence in text.split('.') if word in sentence]
     return sentences
 
 def extract_get_sentiment(word, text):
     # returns aggregate of sentiment for all sentences that contains word in text
     text = text.lower()
     word = word.lower()
-
-    sentiment = get_sentiment('.'.join(extract_sentences(word, text)))
-    return sentiment
+    
+    sentiments = [get_sentiment(sentence) for sentence in extract_sentences(word, text)]
+    
+    if len(sentiments) > 1:
+        return mean(sentiments)
+    return 0
 
 def process_text(text):
     # 1. Lowercase text
