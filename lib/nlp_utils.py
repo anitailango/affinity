@@ -52,8 +52,9 @@ def extract_get_sentiment(word, text):
 def process_text(text):
     # 1. Lowercase text
     # 2. Removes punctuation
-    # 3. Removes stopwords
-    # 4. Lemmatizes remaining words
+    # 3. Removes digits
+    # 4. Removes stopwords
+    # 5. Lemmatizes remaining words
 
     text = text.lower()
 
