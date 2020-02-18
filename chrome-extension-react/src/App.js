@@ -6,7 +6,7 @@ import TestComponent from './components/Test';
 
 function App() {
   return (
-    <div className="App ma3">
+    <div className="App ma3" style={styles}>
         <img src={logo} className="tc pv2" alt="logo" />
         <p className="serif h2">
           affinity 
@@ -19,5 +19,10 @@ function App() {
     </div>
   );
 }
+
+const styles = {
+  minWidth: "250px"
+}
+
 //components to add: buttons with image, headings, title, button for determination of left/right leaning
 export default App;

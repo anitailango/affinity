@@ -5,7 +5,7 @@ class Text extends React.Component {
     render()
     {
         return (
-            <div className = "f4 avenir ttm dark-gray fw5 fn mv2">
+            <div className = "f4 avenir ttm dark-gray fw5 fn mv2" style={styles}>
                 {this.props.text}
             </div>
         )
@@ -13,9 +13,12 @@ class Text extends React.Component {
     
 }
 
-Text.defaultProps = 
-{
+Text.defaultProps = {
     text: "Placeholder"
+}
+
+const styles = {
+    whiteSpace: "nowrap"
 }
 
 export default Text;
