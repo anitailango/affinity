@@ -15,11 +15,12 @@ chrome.webNavigation.onCompleted.addListener(function (e) {
 			return res.json();
 		})
 		.then((json) => {
-			const { author, content } = json;
-			alert(`Author: ${author}\nContent: ${content}\nSaved this buddy boy to local storage!`);
+			const { author, content, publisher } = json;
+			alert(`Author: ${author}\nContent: ${content}\nPublisher: ${publisher}\nSaved this buddy boy to local storage!`);
 			
 			// Save to local storage
 			localStorage.setItem("author", author);
 			localStorage.setItem("content", content);
+			localStorage.setItem("publisher", publisher);
 		});
 }, { url: news_article_urls});
