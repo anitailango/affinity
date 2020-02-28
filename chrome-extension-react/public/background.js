@@ -19,7 +19,7 @@ chrome.webNavigation.onCompleted.addListener(function (e) {
 			alert(`Author: ${author}\nContent: ${content}\nSaved this buddy boy to local storage!`);
 			
 			// Save to local storage
-			localStorage.setItem("author", author);
-			localStorage.setItem("content", content);
+			sessionStorage.setItem("author", author);
+			sessionStorage.setItem("content", content);
 		});
 }, { url: news_article_urls});

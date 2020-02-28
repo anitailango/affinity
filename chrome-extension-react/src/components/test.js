@@ -2,8 +2,8 @@ import React from 'react';
 
 class TestComponent extends React.Component {
 	render() {
-		const author = localStorage.getItem("author");
-		const content = localStorage.getItem("content");
+		const author = sessionStorage.getItem("author");
+		const content = sessionStorage.getItem("content");
 		return (
 			<div>
 				<p>Yo! I'm a react component</p>
