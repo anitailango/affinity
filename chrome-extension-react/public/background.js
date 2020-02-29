@@ -15,11 +15,18 @@ chrome.webNavigation.onCompleted.addListener(function (e) {
 			return res.json();
 		})
 		.then((json) => {
-			const { author, content } = json;
-			alert(`Author: ${author}\nContent: ${content}\nSaved this buddy boy to local storage!`);
+			const { author, content, publisher } = json;
+			// alert(`Author: ${author}\nContent: ${content}\nPublisher: ${publisher}\nSaved this buddy boy to session storage!`);
 			
-			// Save to local storage
-			sessionStorage.setItem("author", author);
-			sessionStorage.setItem("content", content);
+			chrome.runtime.sendMessage({
+				type: "AFFINITY_ARTICLE_INFO",
+				author,
+				content,
+				publisher
+			})
+			// Save to session storage
+			// sessionStorage.setItem("author", author);
+			// sessionStorage.setItem("content", content);
+			// sessionStorage.setItem("publisher", publisher);
 		});
 }, { url: news_article_urls});

@@ -4,7 +4,7 @@ class Text extends React.Component {
 
     render() {
         return (
-            <div className="f4 avenir ttm dark-gray fw5 fn mv2" style={styles}>
+            <div className="f6 avenir ttm dark-gray fw5 fn mv2" style={styles}>
                 {this.props.text}
             </div>
         )

@@ -1,24 +1,22 @@
 import React from 'react';
-// import logo from '../public/favicons/48.png';
-import Header from './components/Header.js';
-import Text from './components/Text.js';
-import TestComponent from './components/Test.js';
+import coloredScale from './icons/coloredScale.png';
+import TopBar from './components/TopBar.js';
+import ArticleInfo from './components/ArticleInfo.js';
 
 function App() {
   return (
-    <div className="App pa3" style={styles}>
-      
-      <div className="flex flex-column" > 
-        <Header text="Title"/>
-        <Text text="Text"/>
+    <div className="App" style={styles}>
+      <TopBar/>
+      <ArticleInfo/>
+      <div>
+        <img src={coloredScale} alt="scale"/>
       </div>
-      <TestComponent/>
     </div>
   );
 }
 
 const styles = {
-  minWidth: "250px",
+  minWidth: "314px",
   background: "#F8F8F8"
 }
 
