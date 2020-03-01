@@ -14,7 +14,15 @@ chrome.webNavigation.onCompleted.addListener(function (e) {
 		.then((res) => {
 			return res.json();
 		})
-		.then(({ author, content }) => {
-			alert(`Author: ${author}\nContent: ${content}`)
-	});
+		.then((json) => {
+			const { author, content, publisher } = json;
+			// alert(`Author: ${author}\nContent: ${content}\nPublisher: ${publisher}\nSaved this buddy boy to session storage!`);
+			
+			chrome.runtime.sendMessage({
+				type: "AFFINITY_ARTICLE_INFO",
+				author,
+				content,
+				publisher
+			})
+		});
 }, { url: news_article_urls});

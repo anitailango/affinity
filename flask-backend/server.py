@@ -12,4 +12,5 @@ def get_scraped_data():
     return {
         "author": "Bob Roberts",
         "content": "hello world",
+        "publisher": "publisher"
     }
