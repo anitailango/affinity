@@ -24,9 +24,5 @@ chrome.webNavigation.onCompleted.addListener(function (e) {
 				content,
 				publisher
 			})
-			// Save to session storage
-			// sessionStorage.setItem("author", author);
-			// sessionStorage.setItem("content", content);
-			// sessionStorage.setItem("publisher", publisher);
 		});
 }, { url: news_article_urls});

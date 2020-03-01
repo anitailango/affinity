@@ -1,16 +1,14 @@
 import React from 'react';
-import coloredScale from './icons/coloredScale.png';
 import TopBar from './components/TopBar.js';
 import ArticleInfo from './components/ArticleInfo.js';
+import Rating from './components/Rating.js';
 
 function App() {
   return (
     <div className="App" style={styles}>
       <TopBar/>
       <ArticleInfo/>
-      <div>
-        <img src={coloredScale} alt="scale"/>
-      </div>
+      <Rating/>
     </div>
   );
 }
