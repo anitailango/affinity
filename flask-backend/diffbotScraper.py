@@ -17,6 +17,7 @@ def diffbotScrape(my_url):
 
 class DiffbotClient(object):
 
+    base_url = 'http://api.diffbot.com/'
     def request(self, url, token, api, fields=None, version=3, **kwargs):
         """
         Returns a python object containing the requested resource from the diffbot api
@@ -35,3 +36,10 @@ class DiffbotClient(object):
         """
         version = self.format_version_string(version_number)
         return '{}{}/{}'.format(self.base_url, version, api)
+
+    @staticmethod
+    def format_version_string(version_number):
+        """
+        Returns a string representation of the API version
+        """
+        return 'v{}'.format(version_number)
