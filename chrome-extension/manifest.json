@@ -1,9 +1,0 @@
-{
-	"name": "Affinity",
-	"version": "0.1",
-	"description": "Affinity Chrome extension test",
-	"browser_action": {
-		"default_popup": "popup.html"
-	},
-	"manifest_version": 2
-}

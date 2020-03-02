@@ -118,7 +118,7 @@ def make_predictions(model, feature_csv, data_to_predict):
     """
     clf = load_model(model)
     features = pd.read_csv(feature_csv)
-    data = data_to_predict
+    data = process_text(data_to_predict)
 
     X_test = create_feature_cols(features['features'], data)
 
