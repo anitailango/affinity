@@ -52,6 +52,14 @@ def preprocessing_pipeline(df):
     scaled = scaler.fit_transform(X)
     X = pd.DataFrame(scaled, columns=col_names)
 
+    # Saving scaler
+    filename = "../saved_models/saved_scaler_v1.sav"
+    if not os.path.exists(filename):
+        pickle.dump(scaler, open(filename, 'wb'))
+        print('Scaler successfully saved!')
+    else:
+        print('Scaler already exists! Try a different name.')
+
     return X, y
 
 def train_model(data):
@@ -105,7 +113,7 @@ def create_feature_cols(feature_list, data):
         
     return df
 
-def make_predictions(model, feature_csv, data_to_predict):
+def make_predictions(model, feature_csv, scaler, data_to_predict):
     """
     make predictions based on data
     Input:
@@ -116,11 +124,19 @@ def make_predictions(model, feature_csv, data_to_predict):
     Output: predictions in a list format (one number) ['2'] etc.
             range of predictions is from 1 - 3 (most left - most right)
     """
+    # Loading parameters
     clf = load_model(model)
     features = pd.read_csv(feature_csv)
     data = process_text(data_to_predict)
+    scaler = pickle.load(open(scaler, 'rb'))
 
-    X_test = create_feature_cols(features['features'], data)
+    # Creating BoW dataframe
+    X = create_feature_cols(features['features'], data)
+
+    # Scaling data
+    col_names = X.columns
+    scaled = scaler.fit_transform(X)
+    X_test = pd.DataFrame(scaled, columns=col_names)
 
     # Makes predictions by multiplying the probability of each class by the class"
     class_probabilites = clf.predict_proba(X_test)[0]
