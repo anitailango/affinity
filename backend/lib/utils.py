@@ -135,7 +135,7 @@ def make_predictions(model, feature_csv, scaler, data_to_predict):
 
     # Scaling data
     col_names = X.columns
-    scaled = scaler.fit_transform(X)
+    scaled = scaler.transform(X)
     X_test = pd.DataFrame(scaled, columns=col_names)
 
     # Makes predictions by multiplying the probability of each class by the class"
