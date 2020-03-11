@@ -10,18 +10,18 @@ chrome.runtime.onInstalled.addListener(function () {
 });
 
 chrome.webNavigation.onCompleted.addListener(function (e) {
-	fetch(api + api_scrape)
+	fetch(api + api_scrape + '?url=' + e.url)
 		.then((res) => {
 			return res.json();
 		})
 		.then((json) => {
-			const { author, content, publisher } = json;
+			const { author, title, publisher } = json;
 			// alert(`Author: ${author}\nContent: ${content}\nPublisher: ${publisher}\nSaved this buddy boy to session storage!`);
 			
 			chrome.runtime.sendMessage({
 				type: "AFFINITY_ARTICLE_INFO",
 				author,
-				content,
+				title,
 				publisher
 			})
 		});
