@@ -8,7 +8,8 @@ function App() {
     <div className="App" style={styles}>
       <TopBar/>
       <ArticleInfo/>
-      <Rating/>
+      {/* <Rating/> */}
+      
     </div>
   );
 }
@@ -18,5 +19,4 @@ const styles = {
   background: "#F8F8F8"
 }
 
-//components to add: buttons with image, headings, title, button for determination of left/right leaning
 export default App;
