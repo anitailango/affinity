@@ -1,7 +1,9 @@
 raw_data/
 venv/
+
 saved_models/
 backend/data/news/
+backend/saved_models
 
 .DS_Store
 backend/.DS_Store
