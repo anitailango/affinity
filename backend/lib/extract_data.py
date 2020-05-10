@@ -1,13 +1,12 @@
 
 import sqlite3
-import os
 import numpy as np
 import pandas as pd
 
-def extract_data(datapath):
-    os.chdir(datapath)
+def extract_data(filepath):
     
-    conn = sqlite3.connect('articles.db')
+    db_path = filepath + 'articles.db'
+    conn = sqlite3.connect(db_path)
     c = conn.cursor()
 
     #c.execute("CREATE TABLE news_labels (source, label);")
@@ -17,7 +16,9 @@ def extract_data(datapath):
     print(c.fetchall())
 
     # Processing Labels
-    labels_df = pd.read_csv("labels.csv")
+    label_path = filepath + 'labels.csv'
+
+    labels_df = pd.read_csv(label_path)
     labels_df.reset_index(inplace=True)
     labels_df.rename(columns={'Unnamed: 0': "Source"}, inplace=True)
     labels_df = labels_df[["Source",

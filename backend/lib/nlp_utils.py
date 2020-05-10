@@ -17,8 +17,8 @@ nltk.download('vader_lexicon')
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 ### Part of Speech Tagging
-# import spacy
-# nlp = spacy.load('en_core_web_sm')
+import spacy
+nlp = spacy.load('en_core_web_sm')
 
 def get_sentiment(text):
     # gets the compound score of the sentiment using the VADER lexicon
