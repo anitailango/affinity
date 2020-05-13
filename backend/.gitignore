@@ -3,6 +3,7 @@
 # Edit at https://www.gitignore.io/?templates=python,virtualenv
 
 /bert
+/use_model
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
