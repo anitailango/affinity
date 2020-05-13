@@ -3,6 +3,9 @@
 # Edit at https://www.gitignore.io/?templates=python,virtualenv
 
 /bert
+/use_model
+/.vscode
+.DS_Store
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
