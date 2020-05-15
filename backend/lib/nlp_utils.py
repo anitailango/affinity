@@ -1,10 +1,18 @@
-
 # This file contains functions that helps with NLP processing
 from statistics import mean
 
 # Natural Language Processing
 ### General
 import nltk
+import ssl
+
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 nltk.download('wordnet')
