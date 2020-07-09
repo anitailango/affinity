@@ -4,7 +4,13 @@ import numpy as np
 import pandas as pd
 
 def extract_data(filepath):
-    
+    """
+    Loads data from Harvard dataset and merges it with respective labels
+    Input: filepath to data folder
+    Output: dataframe of articles and labels
+
+    Note: Current version only returns one column of labels 'Media Bias / Fact Check, label'
+    """
     db_path = filepath + 'articles.db'
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
