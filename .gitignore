@@ -1,6 +1,8 @@
 raw_data/
 venv/
-backend/saved_models
-backend/data/news
+backend/data
+backend/checkpoint
+backend/bias_rater/Archive/saved_models
+
 
 .DS_Store

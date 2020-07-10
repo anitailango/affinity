@@ -1,0 +1,7 @@
+nltk
+numpy
+os
+pandas
+pickle
+scikit-learn
+string

@@ -13,7 +13,7 @@ def predict():
     model = "./saved_models/model_v1.sav"
     features = "./saved_models/saved_features_v1.csv"
 
-    return { "response": utils.make_predictions(model, features, data) - 2 }
+    return { "response": utils.make_predictions(model, features, data)}
     # return {
     #     "author": data["author"],
     #     "title": data["title"],
