@@ -1,0 +1,1 @@
+from document_similarity.combined_distance import get_distance_function
