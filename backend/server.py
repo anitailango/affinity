@@ -1,6 +1,6 @@
 from flask import Flask, request
 from diffbotScraper import diffbotScrape
-from lib import utils
+from bias_rater import EnsembleRater
 app = Flask(__name__)
 
 @app.route('/')
@@ -10,10 +10,12 @@ def predict():
     print("scraped url")
     data = res["objects"][0]["text"]
 
-    model = "./saved_models/model_v1.sav"
-    features = "./saved_models/saved_features_v1.csv"
+    save_dir = 'checkpoint/'
 
-    return { "response": utils.make_predictions(model, features, data) - 2 }
+    clf = EnsembleRater()
+    clf.load_model(save_dir)
+
+    return { "response": clf.predict(data)}
     # return {
     #     "author": data["author"],
     #     "title": data["title"],
