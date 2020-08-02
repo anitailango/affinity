@@ -1,6 +1,6 @@
-import React from 'react';
-import coloredScale from '../icons/coloredScale.png';
-import FloatingIndicator from './FloatingIndicator';
+import React from "react";
+import coloredScale from "../assets/icons/coloredScale.png";
+import FloatingIndicator from "./FloatingIndicator";
 
 class Rating extends React.Component {
 	render() {
@@ -13,7 +13,7 @@ class Rating extends React.Component {
 				</div>
 				<div className="mh3 mb3 f7 avenir fl ttu tracked fw5">
 					<div className="flex justify-between moon-gray">
-						<FloatingIndicator/>
+						<FloatingIndicator />
 						<p>100%</p>
 						<p>0%</p>
 						<p>100%</p>
@@ -26,8 +26,8 @@ class Rating extends React.Component {
 					</div>
 				</div>
 			</div>
-		)
+		);
 	}
 }
 
-export default Rating
+export default Rating;
