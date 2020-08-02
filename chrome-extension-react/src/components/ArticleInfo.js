@@ -5,6 +5,17 @@ import Text from './Text.js';
 import notArticle from './notArticle.png'
 import Rating from './Rating.js'
 import LoadingGif from '../icons/affinity-ball-gif.gif'
+import BookmarkButton from './BookmarkButton'
+
+var DEBUG = true;
+
+const DummyData = {
+	isArticle: true,
+	author: "Joe Bruin",
+	title: "UCLA is the Best",
+	publisher: "affinity",
+	urlString: "google.com"
+}
 
 class ArticleInfo extends React.Component {
 	constructor(props) {
@@ -14,17 +25,24 @@ class ArticleInfo extends React.Component {
 			title: "",
 			author: "",
 			publisher: "",
+			urlString: "",
 			updated: false
 		};
 	}
 
 	componentDidMount() {
-		chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-			if (message.type === "AFFINITY_ARTICLE_INFO") {
-				const { isArticle, author, title, publisher } = message;
-				this.setState({ isArticle, author, title, publisher});
-			}
-		});
+		if (!DEBUG) {
+			chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+				if (message.type === "AFFINITY_ARTICLE_INFO") {
+					const { isArticle, author, title, publisher, urlString } = message;
+					this.setState({ isArticle, author, title, publisher, urlString});
+				}
+			});
+		}
+		else {
+			const { isArticle, author, title, publisher, urlString } = DummyData;
+			this.setState({ isArticle, author, title, publisher, urlString });
+		}
 	}
 
 	componentDidUpdate() {
@@ -33,7 +51,7 @@ class ArticleInfo extends React.Component {
 		console.log(this.state)
 	}
 
-	renderArticleInfo (isArticle, title, author, publisher) {
+	renderArticleInfo (isArticle, title, author, publisher, urlString) {
 		if (title == "None listed")
 		{
 			return ( 
@@ -59,13 +77,16 @@ class ArticleInfo extends React.Component {
 				<div>
 					<Rating />
 				</div>
+				<div className="avenir flex flex-column items-center">
+					<BookmarkButton url={urlString} />
+				</div>
 			</div>
 			)
 		}
 	}
 
 	render() {
-		const { isArticle, title, author, publisher, updated } = this.state;
+		const { isArticle, title, author, publisher, updated, urlString } = this.state;
 		return (
 			
 			!updated ? 
@@ -73,7 +94,7 @@ class ArticleInfo extends React.Component {
 					<img src={LoadingGif} alt = "loading"/>
 				</div>
 				:
-				this.renderArticleInfo(isArticle, title, author, publisher, updated)
+				this.renderArticleInfo(isArticle, title, author, publisher, urlString)
 		)
 	}
 }
