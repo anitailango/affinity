@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CircleButton from './components/CircleButton';
 import questionIcon from './icons/icon-question.png';
 import logo from './icons/logoface-affinity-grey.png';
@@ -30,7 +30,7 @@ function getInfo() {
 }
 function App() {
   let { isArticle, author, title, publisher, urlString } = getInfo();//.then(
-
+  // const [titleText, setTitleText] = useState(Text(title));
   return (
     <div className="App" style={appStyles}>
       {/* TOP BAR */}

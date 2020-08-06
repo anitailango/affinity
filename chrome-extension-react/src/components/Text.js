@@ -11,6 +11,13 @@ class Text extends React.Component {
     }
 }
 
+// export function Text(words) {
+//     return (
+//         <div className="f6 avenir ttm dark-gray fw5 fn mv2" style={styles}>
+//             {this.props.text}
+//         </div>
+//     )
+// }
 Text.defaultProps = {
     text: "Placeholder"
 }
