@@ -6,7 +6,7 @@ Project setup:
 
 To contribute:
 
-- Run `yarn build` to create a build of the app which can be loaded into Google Chrome
+- Run `npm run build` to create a build of the app which can be loaded into Google Chrome
 
 To test:
 
