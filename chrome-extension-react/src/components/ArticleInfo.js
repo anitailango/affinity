@@ -3,7 +3,6 @@ import React from "react";
 import Header from "./Header.js";
 import Text from "./Text.js";
 import notArticleImage from "../assets/images/notArticle.png";
-import Rating from "./Rating.js";
 import LoadingGif from "../assets/images/affinity-ball-gif.gif";
 
 class ArticleInfo extends React.Component {
@@ -51,9 +50,6 @@ class ArticleInfo extends React.Component {
 						<Text text={author} />
 						<Header text="Publisher" />
 						<Text text={publisher} />
-					</div>
-					<div>
-						<Rating />
 					</div>
 				</div>
 			);
