@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import CircleButton from './components/CircleButton';
 import questionIcon from './icons/icon-question.png';
-import logo from './icons/logoface-affinity-grey.png';
 import Header from "./components/Header";
 import Text from "./components/Text";
 let DEBUG = true;
+import logo from "./assets/icons/logoface-affinity-grey.png";
 
 const DummyData = {
   isArticle: true,
@@ -30,18 +30,14 @@ function getInfo() {
 }
 function App() {
   let { isArticle, author, title, publisher, urlString } = getInfo();//.then(
-  // const [titleText, setTitleText] = useState(Text(title));
+
   return (
-    <div className="App" style={appStyles}>
-      {/* TOP BAR */}
-      <div class="pa3 flex justify-between" style={topbarStyles}>
-        {/* This icon needs to be changed to the affinity logo */}
+    <div className="App" style={containerStyle}>
+      <div class="pa3 flex justify-between" style={topBarStyle}>
         <CircleButton icon={questionIcon} />
-        <img src={logo} style={logoStyles} className="tc pv2" alt="logo" />
+        <img src={logo} style={logoStyle} className="tc pv2" alt="logo" />
         <CircleButton icon={questionIcon} />
       </div>
-
-      { /* ARTICLE INFO */}
       <div className="bg-white flex flex-column pa3 ph4">
         <Header text="Title" />
         <Text text={title} />
@@ -55,20 +51,19 @@ function App() {
         Bookmark
 		  </button>
     </div>
-    // );
   );
 }
 
-const appStyles = {
+const containerStyle = {
   minWidth: "314px",
-  background: "#F8F8F8"
-}
+  background: "#F8F8F8",
+};
 
-const topbarStyles = {
+const topBarStyle = {
   height: "52px"
 }
 
-const logoStyles = {
+const logoStyle = {
   width: "50px",
   height: "17px"
 }
