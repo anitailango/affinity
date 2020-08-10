@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import CircleButton from './components/CircleButton';
-import questionIcon from './icons/icon-question.png';
+import questionIcon from './assets/icons/icon-question.png';
 import Header from "./components/Header";
 import Text from "./components/Text";
-let DEBUG = true;
 import logo from "./assets/icons/logoface-affinity-grey.png";
+
+let DEBUG = true;
 
 const DummyData = {
   isArticle: true,
@@ -24,7 +25,7 @@ function getInfo() {
   // }
   // else {
   const { isArticle, author, title, publisher, urlString } = DummyData;
-  // this.setState({ isArticle, author, title, publisher, urlString });
+  //   this.setState({ isArticle, author, title, publisher, urlString });
   // }
   return ({ isArticle, author, title, publisher, urlString });
 }
@@ -46,10 +47,6 @@ function App() {
         <Header text="Publisher" />
         <Text text={publisher} />
       </div>
-
-      <button onClick={function () { console.log(urlString) }}>
-        Bookmark
-		  </button>
     </div>
   );
 }
