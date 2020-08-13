@@ -13,17 +13,24 @@ class ArticleInfo extends React.Component {
 			title: "",
 			author: "",
 			publisher: "",
-			updated: false,
+			urlString: "",
+			updated: false
 		};
 	}
 
 	componentDidMount() {
-		chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-			if (message.type === "AFFINITY_ARTICLE_INFO") {
-				const { isArticle, author, title, publisher } = message;
-				this.setState({ isArticle, author, title, publisher });
-			}
-		});
+		if (!DEBUG) {
+			chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+				if (message.type === "AFFINITY_ARTICLE_INFO") {
+					const { isArticle, author, title, publisher, urlString } = message;
+					this.setState({ isArticle, author, title, publisher, urlString });
+				}
+			});
+		}
+		else {
+			const { isArticle, author, title, publisher, urlString } = DummyData;
+			this.setState({ isArticle, author, title, publisher, urlString });
+		}
 	}
 
 	componentDidUpdate() {
@@ -63,8 +70,8 @@ class ArticleInfo extends React.Component {
 				<img src={LoadingGif} alt="loading" />
 			</div>
 		) : (
-			this.renderArticleInfo(isArticle, title, author, publisher, updated)
-		);
+				this.renderArticleInfo(isArticle, title, author, publisher, updated)
+			);
 	}
 }
 
