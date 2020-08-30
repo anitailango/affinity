@@ -3,23 +3,26 @@
 This is the API endpoint that our Chrome extension can use to access our machine learning model/web scraper.
 
 To setup the server:
+
 - Navigate to this folder in Terminal
 - Run the following commands:
 
-  `python3 -m venv venv`
-  
-  `. venv/bin/activate`
-  
+  `python3 -m venv .env`
+
+  `source .env/bin/activate`
+
   `pip install flask`
 
 To run the server:
+
 - Run the following commands in Terminal:
 
   `export FLASK_APP=server.py`
-  
+
   `flask run`
 
 - You should now see the following in your Terminal window (or something similar):
+
 ```
  * Serving Flask app "server.py"
  * Environment: production
@@ -28,4 +31,5 @@ To run the server:
  * Debug mode: off
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
+
 - You can now navigate to `http://127.0.0.1:5000/` in Chrome to ensure that it is working
