@@ -6,6 +6,8 @@ import Header from "./components/Header";
 import Text from "./components/Text";
 import logo from "./assets/icons/logoface-affinity-grey.png";
 
+const SLIGHTLY_THRESHOLD = 0.5;
+
 let DEBUG = false;
 
 const FakeData = {
@@ -17,7 +19,16 @@ const FakeData = {
 	rating: 0.0,
 };
 
-function App(_props) {
+const api = "http://127.0.0.1:5000/";
+
+function ratingToText(rating) {
+	if (rating == 0) return "Neutral";
+	const modifier = Math.abs(rating) < SLIGHTLY_THRESHOLD ? "Slightly" : "";
+	const alignment = rating > 0 ? "Right" : "Left";
+	return `${modifier} ${alignment} Leaning`;
+}
+
+function App(_) {
 	const [articleInfo, setArticleInfo] = useState({});
 
 	useEffect(() => {
@@ -25,10 +36,24 @@ function App(_props) {
 			setArticleInfo(FakeData);
 			return;
 		}
-		chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+
+		chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
 			if (message.type === "AFFINITY_ARTICLE_INFO") {
+				console.log(message);
 				setArticleInfo(message);
 			}
+		});
+
+		chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+			const activeTab = tabs[0];
+			console.log(activeTab);
+			fetch(api + "?url=" + activeTab.url)
+				.then((res) => {
+					return res.json();
+				})
+				.then((json) => {
+					setArticleInfo(json);
+				});
 		});
 	}, []);
 
@@ -40,19 +65,23 @@ function App(_props) {
 				<img src={logo} style={logoStyle} className="tc pv2" alt="logo" />
 				<CircleButton icon={questionIcon} />
 			</div>
-			<div className="bg-white flex flex-column pa3 ph4">
-				<Header text="Title" />
-				<Text text={title} />
-				<Header text="Author" />
-				<Text text={author} />
-				<Header text="Publisher" />
-				<Text text={publisher} />
-			</div>
-			<div className="pa3 flex flex-column items-center">
-				<div className="pa3 br2 bg-white w-90 baskerville f4 fw5 tc mid-gray">
-					{rating}
-				</div>
-			</div>
+			{articleInfo.rating && (
+				<>
+					<div className="bg-white flex flex-column pa3 ph4">
+						<Header text="Title" />
+						<Text text={title} />
+						<Header text="Author" />
+						<Text text={author} />
+						<Header text="Publisher" />
+						<Text text={publisher} />
+					</div>
+					<div className="pa3 flex flex-column items-center">
+						<div className="pa3 br2 bg-white w-90 baskerville f4 fw5 tc mid-gray">
+							{ratingToText(rating)}
+						</div>
+					</div>
+				</>
+			)}
 		</div>
 	);
 }

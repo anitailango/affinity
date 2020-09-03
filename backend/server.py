@@ -5,6 +5,10 @@ from newspaper import Article, build
 
 app = Flask(__name__)
 
+save_dir = 'checkpoint/'
+clf = EnsembleRater()
+clf.load_model(save_dir)
+
 
 @app.route('/')
 def predict():
@@ -13,14 +17,7 @@ def predict():
     article = Article(url)
     article.download()
     article.parse()
-    # res = diffbotScrape(url)
-    # print("scraped url")
-    # data = res["objects"][0]["text"]
     data = article.text
-    save_dir = 'checkpoint/'
-
-    clf = EnsembleRater()
-    clf.load_model(save_dir)
     rating = clf.predict(data)
 
     return {
@@ -30,12 +27,6 @@ def predict():
         "text": article.text,
         "rating": rating,
     }
-    # return {
-    #     "author": data["author"],
-    #     "title": data["title"],
-    #     "publisher": data["siteName"],
-    #     "text": data["text"]
-    # }
 
 
 @app.route('/scrape')
