@@ -8,6 +8,7 @@ def predict():
     url = request.args.get('url', '')
     res = diffbotScrape(url)
     print("scraped url")
+    print(res)
     data = res["objects"][0]["text"]
 
     save_dir = 'checkpoint/'

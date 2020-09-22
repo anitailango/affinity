@@ -8,12 +8,13 @@ def diffbotScrape(my_url):
     url = my_url
     api = "analyze"
     response = diffbot.request(url, token, api, fields=['title', 'type'])
-
-    return response
+    
+    return response    
     my_dict[my_url] = response
     file = my_url + ".json"
     with open(file,  'a+') as f:
          json.dump(my_dict, f, sort_keys = True, indent = 4)
+
 
 class DiffbotClient(object):
 
