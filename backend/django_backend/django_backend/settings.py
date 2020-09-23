@@ -45,6 +45,8 @@ INSTALLED_APPS = [
 
     # project apps
     'users',
+    'bookmarks',
+    'history'
 ]
 
 # use tokenauthentication for DRF auth
