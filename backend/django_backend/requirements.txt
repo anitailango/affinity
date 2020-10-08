@@ -1,3 +1,6 @@
 Django
 djangorestframework
 psycopg2
+newspaper3k
+pandas
+sklearn

@@ -1,11 +1,11 @@
 import React from 'react';
 
-function BookmarkButton(url) {
+const BookmarkButton = (url) => {
 	return (
 		<button onClick={function() { console.log(url.url) }}>
             Bookmark
 		</button>
-	)
+	);
 }
 
 function saveURL(url) {

@@ -29,15 +29,9 @@ def predict():
 @app.route('/scrape')
 def get_scraped_data():
     print('scraped')
-    #    url = request.args.get('url', '')
-    #    res = diffbotScrape(url)
-    #    data = res["objects"][0]
-    return {
-        "author": 'collin',
-        "title": 'yo',
-        "publisher": 'yea',
-        "text": 'uh huh'
-    }
+#    url = request.args.get('url', '')
+#    res = diffbotScrape(url)
+#    data = res["objects"][0]
 #    return {
 #        "author": data["author"],
 #        "title": data["title"],

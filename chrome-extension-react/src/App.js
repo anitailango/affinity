@@ -1,56 +1,53 @@
 /* global chrome */
-import React, { useEffect, useState } from "react";
-import CircleButton from "./components/CircleButton";
+import React, { useEffect, useState, useRef } from "react";
+import CircleButton from "./components/GenericComponents/CircleButton";
 import questionIcon from "./assets/icons/icon-question.png";
-import Header from "./components/Header";
-import Text from "./components/Text";
+import { Header, Text, ExtensionHeader, ExtensionBody } from "./components/GenericComponents/GenericComponents";
 import logo from "./assets/icons/logoface-affinity-grey.png";
+import BottomBar from './components/BottomBar/BottomBar';
 
-let DEBUG = true;
+let DEBUG = false;
 
 const FakeData = {
-	isArticle: true,
-	author: "Joe Bruin",
-	title: "UCLA is the Best",
-	publisher: "affinity",
-	urlString: "google.com",
+	isArticle: false,
+	author: "N/A",
+	title: "N/A",
+	publisher: "N/A",
+	urlString: "N/A",
 };
 
-function getInfo() {
-	const { isArticle, author, title, publisher, urlString } = FakeData;
-	if (!DEBUG) {
-		chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-			if (message.type === "AFFINITY_ARTICLE_INFO") {
-				const { isArticle, author, title, publisher, urlString } = message;
-				return { isArticle, author, title, publisher, urlString };
-			}
-		});
-	}
-	return { isArticle, author, title, publisher, urlString };
-}
-
 function App(_props) {
-	const [articleInfo, setArticleInfo] = useState({});
+	const [articleInfo, setArticleInfo] = useState(FakeData);
 	useEffect(() => {
-		setArticleInfo(getInfo());
+		chrome.runtime.onMessage.addListener(message_handler);
 	});
 
-	const { author, title, publisher } = articleInfo;
+	const message_handler = (message, sender, sendResponse) => {
+		if (message.type === "AFFINITY_ARTICLE_INFO") {
+			const { isArticle, author, title, publisher, rating, urlString } = message;
+			setArticleInfo({ isArticle, author, title, publisher, rating, urlString, done: true });
+		}
+	}
+
+	const { author, title, publisher, rating } = articleInfo;
 	return (
 		<div className="App" style={containerStyle}>
-			<div class="pa3 flex justify-between" style={topBarStyle}>
+			<ExtensionHeader>
 				<CircleButton icon={questionIcon} />
 				<img src={logo} style={logoStyle} className="tc pv2" alt="logo" />
 				<CircleButton icon={questionIcon} />
-			</div>
-			<div className="bg-white flex flex-column pa3 ph4">
+			</ExtensionHeader>				
+			<ExtensionBody>
 				<Header text="Title" />
 				<Text text={title} />
 				<Header text="Author" />
 				<Text text={author} />
 				<Header text="Publisher" />
 				<Text text={publisher} />
-			</div>
+				<Header text="Rating" />
+				<Text text={rating} />
+			</ExtensionBody>			
+			<BottomBar />
 		</div>
 	);
 }

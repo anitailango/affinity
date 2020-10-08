@@ -1,13 +1,13 @@
 import React from 'react';
 
-function CircleButton(props) {
+const CircleButton = (props) => {
 	return (
 		<div className="br-100 bg-white" style={circleStyle}>
 			<a href="#">
 				<img src={props.icon} style={imgStyle}/>
 			</a>
 		</div>
-	)
+	);
 }
 
 const circleStyle = {
