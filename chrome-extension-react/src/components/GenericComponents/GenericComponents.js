@@ -44,7 +44,7 @@ PurpleFormButton.propTypes = {
 }
 
 export const WhiteFormButton = (props) => (
-    <input className="b br2 ph3 pv2 input-reset ba bg-transparent grow pointer f6 dib" type="submit" value={props.text} style={{color: "#9A5B85", border: "1px solid #9A5B85"}}/>                                
+    <input className="b br2 ph3 pv2 input-reset ba bg-transparent grow pointer f6 dib" type="submit" value={props.text} style={{color: "#9A5B85", border: "1px solid #9A5B85"}}/>
 );
 
 WhiteFormButton.propTypes = {
