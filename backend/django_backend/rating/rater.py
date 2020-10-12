@@ -21,7 +21,6 @@ class Rater:
         article.parse()
         self.title = article.title
         self.authors = ', '.join(article.authors)
-        print(type(self.authors))
         text = article.text
         if self.affinity_model_flag:
             # this is not implemented correctly
@@ -34,5 +33,6 @@ class Rater:
             row = ratings.loc[ratings['domain'].str.lower() == domain]
             self.publisher = row['allsides'].iloc[0]
             self.rating = row['rating'].iloc[0]
+            print(self.rating)
             return row['rating'].iloc[0]
 
