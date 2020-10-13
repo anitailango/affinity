@@ -11,13 +11,13 @@ import UserView from './components/ExtensionViews/UserView';
 
 let DEBUG = false;
 
-const FakeData = {
-	isArticle: false,
-	author: "N/A",
-	title: "N/A",
-	publisher: "N/A",
-	urlString: "N/A",
-};
+// const FakeData = {
+// 	isArticle: false,
+// 	author: "N/A",
+// 	title: "N/A",
+// 	publisher: "N/A",
+// 	urlString: "N/A",
+// };
 
 // enum to define the views that can be shown in the extension body
 const ExtensionViews = {
@@ -27,18 +27,26 @@ const ExtensionViews = {
 }
 
 function App(_props) {
-	const [articleInfo, setArticleInfo] = useState(FakeData);
+	const [articleInfo, setArticleInfo] = useState({author: "start", title: 'start', publisher: 'start', rating: 'start'});
 	const [currentView, setCurrentView] = useState(ExtensionViews.RATING);
+
+	// initial setting of data
+	chrome.storage.sync.get([
+		'type', 'author', 'title', 'publisher', 'rating'], function(items) {
+			console.log(items);
+			setArticleInfo(items)
+	});
 	useEffect(() => {
-		chrome.runtime.onMessage.addListener(message_handler);
+		// when storage data changes update the article info
+		chrome.storage.onChanged.addListener(async function(changes, namespace) {
+			await chrome.storage.sync.get([
+				'type', 'author', 'title', 'publisher', 'rating'], function(items) {
+					console.log(items);
+					setArticleInfo(items)
+				});			
+		  });	
 	});
 
-	const message_handler = (message, sender, sendResponse) => {
-		if (message.type === "AFFINITY_ARTICLE_INFO") {
-			const { isArticle, author, title, publisher, rating, urlString } = message;
-			setArticleInfo({ isArticle, author, title, publisher, rating, urlString, done: true });
-		}
-	}
 	
 
 	const handleBottomBarClick = (e) => {

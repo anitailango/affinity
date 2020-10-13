@@ -8,8 +8,39 @@ const news_article_urls = [
 const api = 'http://127.0.0.1:8000/'
 const api_scrape = 'rating/'
 
+chrome.storage.sync.set({ // set up data
+	'type': 'inactive', 
+	'author': ' ',
+	'title': ' ',
+	'publisher': ' ',
+	'rating': ' '
+});
+
 chrome.runtime.onInstalled.addListener(function () {
 	console.log('on installed');
+	
+});
+
+chrome.runtime.onStartup.addListener(function () {
+	console.log('on startup');
+	chrome.storage.sync.set({ // set up data
+		'type': 'inactive', 
+		'author': ' ',
+		'title': ' ',
+		'publisher': ' ',
+		'rating': ' '
+	});
+});
+
+chrome.webNavigation.onCommitted.addListener(function (e) {
+	console.log('on committed');
+	chrome.storage.sync.set({ // set up data
+		'type': 'inactive', 
+		'author': ' ',
+		'title': ' ',
+		'publisher': ' ',
+		'rating': ' '
+	});
 });
 
 chrome.webNavigation.onCompleted.addListener(function (e) {
@@ -39,6 +70,25 @@ chrome.webNavigation.onCompleted.addListener(function (e) {
 				publisher,
 				rating
 			});
+			// store the request
+			chrome.storage.sync.set({
+				'type': 'article',
+				author, 
+				title,
+				publisher,
+				rating
+			});
 			console.log('sent');
 		});
 }, { url: news_article_urls});
+
+
+chrome.runtime.onSuspend.addListener(function() {
+	chrome.storage.sync.set({
+		'type': 'inactive', 
+		'author': ' ',
+		'title': ' ',
+		'publisher': ' ',
+		'rating': ' '
+	});
+});
