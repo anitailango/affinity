@@ -1,38 +1,31 @@
 import React, { useState, useContext} from 'react'
+import styled from 'styled-components';
+
 import ArticleIcon from '../../assets/icons/article_icon.png';
 import BookmarkIcon from '../../assets/icons/bookmark_icon.png';
 import UserIcon from '../../assets/icons/user_icon.svg';
-import Logo from '../../assets/icons/logoface-affinity-grey.png';
-import Login from '../AuthView/Login';
 import PopupDisplay from '../AuthView/PopupDisplay';
 
-const BottomBar = ({handleViewChange}) => {
-    const [showPopup, setShowPopup] = useState(false);
+/**
+ * Component that defines the bottom bar of the chrome extension window
+ */
 
-    // const handleViewChange = () => {
-    //     e.persist();
-    //     console.log(e.target.id);
-    //     switch(e.target.id) {
-    //         case 'user':
-    //             setShowPopup(true);
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
+
+const BottomBar = ({handleViewChange}) => {
+    const [showPopup, setShowPopup] = useState(false);    
 
     return (
         <div>
-            <div className="flex justify-between" style={{height: "18vh"}}>
-                <div className="flex justify-center w-30 pa3">
-                    <input id="rating" type="image" src={ArticleIcon}  style={{height: "100%", aspectRatio: "100%"}} onClick={handleViewChange} />
-                </div>
-                <div className="flex justify-center w-30 pa3">
-                    <input id="bookmarks" type="image" src={BookmarkIcon} style={{height: "100%", aspectRatio: "100%"}} onClick={handleViewChange} />
-                </div>
-                <div className="flex justify-center w-30 pa3">
-                    <input id="user" type="image" src={UserIcon} style={{height: "100%", aspectRatio: "100%"}} onClick={handleViewChange} />
-                </div>
+            <BottomBarContainer>
+                <BottomBarButtonWrapper>
+                    <BottomBarButton id="rating" type="image" src={ArticleIcon} onClick={handleViewChange} />
+                </BottomBarButtonWrapper>
+                <BottomBarButtonWrapper>
+                    <BottomBarButton id="bookmarks" type="image" src={BookmarkIcon} onClick={handleViewChange} />
+                </BottomBarButtonWrapper>
+                <BottomBarButtonWrapper>
+                    <BottomBarButton id="user" type="image" src={UserIcon} onClick={handleViewChange} />
+                </BottomBarButtonWrapper>
                 <div id="popup">
                     {
                         showPopup ? 
@@ -41,9 +34,27 @@ const BottomBar = ({handleViewChange}) => {
                             null
                     }
                 </div>
-            </div>
+            </BottomBarContainer>
         </div>
     );
 }
+
+const BottomBarContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    height: 15vh;
+`
+
+const BottomBarButtonWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    padding: .3rem;
+`
+
+const BottomBarButton = styled.input`
+    height: 100%;
+    aspect-ratio: 100%;
+`
 
 export default BottomBar;

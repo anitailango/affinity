@@ -1,55 +1,74 @@
-import React, { useState } from 'react';
-import PopupDisplay from '../AuthView/PopupDisplay';
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 import * as GenericComponents from '../GenericComponents/GenericComponents';
-
-const PopupOptions = {
-    HIDDEN: 0,
-    LOGIN: 1,
-    REGISTER: 2,
-}
+import SignInView from './SignInView';
 
 const UserView = () => {
-    const [popupOption, setPopupOption] = useState(PopupOptions.HIDDEN);
 
-    const handlePopup = (e) => {
-        e.persist();
-        switch(e.target.id) {
-            case 'login':
-                setPopupOption(PopupOptions.LOGIN);
-                break;
-            case 'register':
-                setPopupOption(PopupOptions.REGISTER);
-                break;
-            default:
-                break;
-        }
+    const [token, setToken] = useState(localStorage.getItem('affinity_token'));
+    // useEffect(() => {}, [token]); // listen to see if token is added or removed
+
+    const [userData, setUserData] = useState({
+        token: localStorage.getItem('affinity_token'),
+        email: localStorage.getItem('affinity_email'),
+        first_name: localStorage.getItem('affinity_first_name'),
+        last_name: localStorage.getItem('affinity_last_name')
+    });
+
+    useEffect(() => {
+        setUserData({
+            token: localStorage.getItem('affinity_token'),
+            email: localStorage.getItem('affinity_email'),
+            first_name: localStorage.getItem('affinity_first_name'),
+            last_name: localStorage.getItem('affinity_last_name')
+        });
+    }, [localStorage.getItem('affinity_token'), localStorage.getItem('affinity_email'), localStorage.getItem('affinity_first_name'), localStorage.getItem('affinity_last_name')]);
+
+
+    const logout = () => {
+        localStorage.removeItem('affinity_token');
+        localStorage.removeItem('affinity_email');
+        localStorage.removeItem('affinity_first_name')
+        localStorage.removeItem('affinity_last_name')
+        setToken(null);
     }
+    useEffect(() => {}, [token]); // listen to see if token is added or removed
 
-    let popup;
-    switch (popupOption) {
-        case PopupOptions.LOGIN:
-            popup = <PopupDisplay isLogin={true} />
-            break;
-        case PopupOptions.REGISTER:
-            popup = <PopupDisplay isLogin={false} />
-            break;
-        default:
-            popup = null;
-            break;
-    }
+    const UserViewDisplay = (
+        <GenericComponents.ExtensionBody>
+            <h2>
+                Welcome, {userData.first_name}.
+            </h2>
+            <GenericComponents.Header text="Email"/>
+            <GenericComponents.Text text={userData.email} />
+            <SectionSpace />
+            <UserLink href="https://affinityfornews.com/" >Newsletter Signup</UserLink>
+            <UserLink href="#" >Change Password</UserLink>
+            <UserLink href="#" onClick={() => logout()}>Logout</UserLink>
 
-    return (
-        <div className="flex flex-column justify-center" style={{height: "260px", backgroundColor: "#fff"}}>
-            <div className="flex justify-center w-100 pv2" >            
-                <input id="register" className="b br2 white ph3 pv2 input-reset ba grow pointer f6 dib w-50" type="button" value="REGISTER" style={{backgroundColor: "#9A5B85", border: "1px solid #9A5B85"}} onClick={handlePopup} />            
-            </div>
-            <div className="flex justify-center w-100 pv2" >
-                <input id="login" className="b br2 ph3 pv2 input-reset ba bg-transparent grow pointer f6 dib w-50" type="submit" value="LOGIN" style={{color: "#9A5B85", border: "1px solid #9A5B85"}} onClick={handlePopup} />                                
-            </div>
-            { popup }
-        </div>  
-    );      
+        </GenericComponents.ExtensionBody>
+    );
+    const current_view = localStorage.getItem('affinity_token') ? UserViewDisplay : <SignInView />;
+    
+    return (current_view);
 }
+
+const SectionSpace = styled.div`
+    width: 100%;
+    padding-top: .4rem;
+`
+
+const UserLink = styled.a`
+    color: #9A5B85;
+    text-transform: uppercase;
+    font-size: .75rem;
+    font-weight: 700;
+    padding-top: .3rem;
+    padding-bottom: .3rem;
+`
+
+// actual front end display for this component
+
 
 export default UserView;

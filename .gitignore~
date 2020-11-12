@@ -3,6 +3,6 @@ venv/
 backend/data
 backend/checkpoint
 backend/bias_rater/Archive/saved_models
-backend/django_backend/.env
+
 
 .DS_Store

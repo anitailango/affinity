@@ -1,5 +1,5 @@
 from newspaper import Article
-from urllib.parse import urlparse
+from urllib.parse import urlparse, parse_qs
 import newspaper
 import pandas as pd
 import pathlib
@@ -16,7 +16,11 @@ class Rater:
         self.publisher = ''
 
     def generate_rating(self, url):
-        article = Article(url)
+        # updated_url = urlparse(url)
+        # print(updated_url)
+        config = newspaper.Config()
+        config.browser_user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'
+        article = Article(url, config=config)
         article.download()
         article.parse()
         self.title = article.title

@@ -2,7 +2,9 @@
 // These are the whitelisted sources for affinity to scrape data
 const news_article_urls = [
 	{ "hostSuffix": "www.nytimes.com" },
-	{ "hostSuffix": "www.wsj.com" }
+	{ "hostSuffix": "www.wsj.com" },
+	{ "hostSuffix": "www.cnn.com"},
+	{ "hostSuffix": "www.foxnews.com"}
 ]
 
 const api = 'http://127.0.0.1:8000/'

@@ -15,12 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls import url
 from rest_framework import routers
-# from ..users import views
 from rest_framework.authtoken.views import obtain_auth_token
 
-# router = routers.DefaultRouter()
-# router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +26,7 @@ urlpatterns = [
     path('', include('users.urls')),
     path('', include('bookmarks.urls')),
     path('', include('history.urls')),
-    path('', include('rating.urls'))
+    path('', include('rating.urls')),
+    url(r'^accounts/password-reset/',
+        include('django_rest_resetpassword.urls', namespace='password_reset')),
 ]

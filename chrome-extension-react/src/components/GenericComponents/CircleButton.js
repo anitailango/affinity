@@ -1,26 +1,31 @@
 import React from 'react';
+import styled from 'styled-components';
 
 const CircleButton = (props) => {
 	return (
-		<div className="br-100 bg-white" style={circleStyle}>
+		<CircleButtonDiv>
 			<a href="#">
-				<img src={props.icon} style={imgStyle}/>
+				<CircleImage src={props.icon} />
 			</a>
-		</div>
+		</CircleButtonDiv>
 	);
 }
 
-const circleStyle = {
-	width: "26px",
-	height: "26px",
-	padding: "6px"
-}
+const CircleButtonDiv = styled.div`
+	border-radius: 100%;
+	background-color: white;
+	width: 26px;
+	height: 26px;
+	padding: 6px;
+`
+const CircleImage = styled.img`
+	display: block;
+	margin: auto;
+	max-height: 100%;
+	max-width: 100%;
+`
 
-const imgStyle = {
-	display: "block",
-	margin: "auto",
-	maxHeight: "100%",
-	maxWidth: "100%"
-}
+
+
 
 export default CircleButton;

@@ -20,15 +20,17 @@ def rating_response(request):
         # use bias rater to get rating
         rater.generate_rating(url)
         return JsonResponse({ "author": rater.authors, "title": rater.title, "publisher": rater.publisher, "rating":  rater.rating})
+    else: 
+        return JsonResponse({"error": "Only GET requests are served at this endpoint"})
         
 
 
         
 
-class RatingViewSet(viewsets.ModelViewSet):
-    '''
-    Serves reponse data for rating endpoint
-    '''
-    queryset = Rating.objects.all()
-    serializer_class = RatingSerializer
+# class RatingViewSet(viewsets.ModelViewSet):
+#     '''
+#     Serves reponse data for rating endpoint
+#     '''
+#     queryset = Rating.objects.all()
+#     serializer_class = RatingSerializer
 # Create your views here.

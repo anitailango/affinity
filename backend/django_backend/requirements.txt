@@ -4,3 +4,4 @@ psycopg2
 newspaper3k
 pandas
 sklearn
+django-rest-resetpassword
